@@ -4,7 +4,7 @@ import { ClientsContext } from '../Contexts/ClientsContext';
 
 function AddClient() {
 
-    const {areaList, addClient} = useContext(ClientsContext)
+    const {areaList, addNewClient} = useContext(ClientsContext)
 
     const [name, setName] = useState()
     const [area, setArea] = useState()
@@ -18,7 +18,7 @@ function AddClient() {
 
         <form onSubmit={event => {
             event.preventDefault()
-            addClient(name, area, address, interval, date)
+            addNewClient(name, area, address, interval, date)
 
             
         }}>
