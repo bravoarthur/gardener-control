@@ -12,7 +12,7 @@ function Edit({handlePage}) {
     const [area, setArea] = useState(modList[index].area)
     const [address, setAddress] = useState(modList[index].address)
     const [interval, setInterval] = useState(modList[index].interval)
-    const [lastVisit, setDate] = useState(modList[index].lastVisit)
+    const lastVisit = modList[index].lastVisit
     const [visitList, setVisitList] = useState(modList[index].visitList)
     const [notes, setNotes] = useState(modList[index].notes)
 
@@ -23,6 +23,15 @@ function Edit({handlePage}) {
 
         addNewClient(name, area, address, interval, lastVisit, visitList, notes)
         
+    }
+
+    const _handleDeleteVisit = (indexVisit) => {
+
+        let newVisitList = visitList
+        
+        newVisitList.splice(indexVisit, 1) 
+        setVisitList(newVisitList)
+        _handleSave()        
     }
 
 
@@ -63,7 +72,7 @@ function Edit({handlePage}) {
             <div>
 
                 <h4>Visit List...</h4>
-                {visitList.map((item, ind) => <li key={ind}>{item}</li>)}
+                {visitList.map((item, ind) => <li key={ind}>{item} <button onClick={() => _handleDeleteVisit(ind)}>Delete visit</button></li>)}
 
             </div>
 

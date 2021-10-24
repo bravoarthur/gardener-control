@@ -110,7 +110,7 @@ const ClientsProvider = ({children}) => {
 
     return (
 
-        <ClientsContext.Provider value={{clientList, areaList, addNewClient, _handleTodayVisit, _handleSelectedDate, setEditPage, editPage, _handleChangeName}}>{children}</ClientsContext.Provider>
+        <ClientsContext.Provider value={{clientList, areaList, addNewClient, _handleTodayVisit, _handleSelectedDate, setEditPage, editPage, _handleChangeName, setAreaList}}>{children}</ClientsContext.Provider>
     )
 
 
