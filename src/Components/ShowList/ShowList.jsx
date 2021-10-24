@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react';
 import { ClientsContext } from '../Contexts/ClientsContext';
 
-function ShowList() {
+function ShowList({handlePage}) {
 
 
-    const {areaList, clientList, _handleTodayVisit} = useContext(ClientsContext)
+    const {areaList, clientList, _handleTodayVisit, _handleSelectedDate, setEditPage} = useContext(ClientsContext)
 
     const [intervalSelector, setIntervalSelector] = useState(7)
 
@@ -20,7 +20,9 @@ function ShowList() {
                     <th>Last Visit</th>
                     <th>Frequency</th>
                     <th>Next Visit</th>
-                    <th>Include Visit</th>
+                    <th>Include Visit Today</th>
+                    <th>Include Selected Date</th>
+                    <th>More Info / Edit</th>
                                     
                 </tr>
 
@@ -36,6 +38,13 @@ function ShowList() {
 
         setIntervalSelector(event.target.value)
 
+    }
+
+    const _handleEdit = (event) => {
+
+        const clientCapture = event.target.parentElement.closest('tr').id
+        setEditPage(clientCapture)
+        handlePage(2)
     }
 
 
@@ -98,6 +107,8 @@ function ShowList() {
                                                 <td>{it.interval}</td>
                                                 <td>{_handleNextVisit(it.lastVisit, it.interval)}</td>
                                                 <td><button onClick={_handleTodayVisit}>Visited Today</button></td>
+                                                <td><input type="date" onChange={_handleSelectedDate}/></td>
+                                                <td><button onClick={_handleEdit}>Edit</button></td>
                                                                                
                                             </tr>
 
@@ -133,9 +144,6 @@ function _handleNextVisit(lVisit, freq)  {
     
     const date = `${year}/${month}/${day}`
     
-
-    
-
     const lastDate = new Date(date)
     lastDate.setDate(lastDate.getDate() + Number(freq))
     
