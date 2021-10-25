@@ -133,7 +133,7 @@ function _handleNewDate(date=null) {
         lDate = new Date(date)}
 
 
-    lDate.setDate(lDate.getDate())
+    //lDate.setDate(lDate.getDate())
 
     const day = String(lDate.getDate()).padStart(2, '0');
     const month = String(lDate.getMonth() + 1).padStart(2, '0'); //January is 0!

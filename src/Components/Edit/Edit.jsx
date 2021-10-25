@@ -62,7 +62,7 @@ function Edit({handlePage}) {
 
                 <li>Address: <input type="text" value={address} onChange={(event) => setAddress(event.target.value)}/></li>
 
-                <li>Interval: <input type="number" value={interval} onChange={(event) => setInterval(event.target.value)}/></li>
+                <li>Frequency: <input type="number" value={interval} onChange={(event) => setInterval(event.target.value)}/></li>
 
                 <li>Last Visit: {lastVisit} </li>
                 

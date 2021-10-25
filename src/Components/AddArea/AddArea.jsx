@@ -20,6 +20,7 @@ function AddArea ({handlePage}) {
         }else {
 
             let newAreaList = areaList.map(item => item)
+            // eslint-disable-next-line no-unused-vars
             let areaDeleted = newAreaList.splice(indexArea, 1)
 
             setAreaList(newAreaList)            
