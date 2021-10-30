@@ -1,9 +1,12 @@
+import { MenuItem, TextField } from '@material-ui/core';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import React, { useContext, useState } from 'react';
 import { ClientsContext } from '../Contexts/ClientsContext';
+import { ButtonA, ButtonB, ButtonDelete, DivBtnEdit, DivEdit, H3, InputNumberEdit, TableEdit, TrEdit } from '../UI';
 
 function Edit({handlePage}) {
 
-    const {clientList, editPage, areaList, addNewClient, _handleChangeName} = useContext(ClientsContext)
+    const {clientList, editPage, areaList, addNewClient, _handleChangeName, deleteClient} = useContext(ClientsContext)
 
     const modList = clientList.map(item => item)
     const index = modList.findIndex(item => item.name === editPage)
@@ -34,59 +37,145 @@ function Edit({handlePage}) {
         _handleSave()        
     }
 
+    const _handleDeleteClient = () => {
+        
+        deleteClient(name)
+        handlePage(0)
+    }
+
 
 
     return (
 
         <div>
 
-            <div>
+            <H3>Edit Client</H3>
 
-                <li>Name: <input type="text" value={name} onChange={(event) => {                        
-                        setName(event.target.value)
-                        _handleChangeName(oldName, event.target.value)
-                        }
-                    
-                }/></li>
+            <TableEdit>
 
-                <li>area:
-                    <select defaultValue={area} onChange={event => setArea(event.target.value)}>
+                <tbody>
 
-                        {areaList.map((item, index) => 
-                        <option value={item} key={index}>{item}</option>
-                        )}
+                    <TrEdit>
 
-                    </select>
-                               
-                </li>
+                        <td className='tdEdit'>Name:</td>
+                        <td className='tdEditCampo'>
 
-                <li>Address: <input type="text" value={address} onChange={(event) => setAddress(event.target.value)}/></li>
+                            <TextField type="text" variant='outlined' size='small' label='Name' className='textInputEdit' value={name} onChange={(event) => {setName(event.target.value)
+                            _handleChangeName(oldName, event.target.value)}}/>
 
-                <li>Frequency: <input type="number" value={interval} onChange={(event) => setInterval(event.target.value)}/></li>
+                        </td>
+        
+                    </TrEdit>
 
-                <li>Last Visit: {lastVisit} </li>
-                
+                    <TrEdit>
 
-            </div>
+                        <td>Area:</td>
+                        <td className='tdEditCampo'>
 
-            <div>
+                        <TextField variant='outlined' className='textInputEdit' select label='Area' size='small' fullWidth defaultValue={area} onChange={event => setArea(event.target.value)}>
 
-                <h4>Visit List...</h4>
-                {visitList.map((item, ind) => <li key={ind}>{item} <button onClick={() => _handleDeleteVisit(ind)}>Delete visit</button></li>)}
+                            {areaList.map((item, index) => 
+                            <MenuItem value={item} key={index}>{item}</MenuItem>
+                            )}
 
-            </div>
+                        </TextField>
 
-            <div>
+                        </td>
+        
+                    </TrEdit>
+
+                    <TrEdit>
+
+                        <td>Address:</td>
+                        <td className='tdEditCampo'>
+
+                            <TextField type="text" variant='outlined' className='textInputEdit' size='small' fullWidth value={address} label='Address' onChange={(event) => setAddress(event.target.value)}/>
+
+                        </td>
+        
+                    </TrEdit>
+
+                    <TrEdit>
+
+                        <td>Frequency:</td>
+                        <td className='tdEditCampo'>
+
+                            <InputNumberEdit type="number" placeholder='Frequency' className='textInputEdit' min='1' value={interval} onChange={(event) => setInterval(event.target.value)}/>
+
+                        </td>
+        
+                    </TrEdit>
+
+                    <TrEdit>
+
+                        <td>Last Visit:</td>
+                        <td className='tdEditCampo'>
+
+                            {lastVisit}
+
+                        </td>
+        
+                    </TrEdit>
+                        
+                </tbody>
+
+            </TableEdit>
+
+            <DivEdit>
 
                 <h4>Notes</h4>
-                <textarea rows="5" cols="50" value={notes} onChange={(event) => setNotes(event.target.value)}/>
-                
-            </div>
+                <TextField variant='outlined' type="text" multiline maxRows={4} minRows={4} fullWidth label="Notes" value={notes} onChange={(event) => setNotes(event.target.value)}/>
 
-            <button onClick={() => handlePage(0)}>Back Home</button>
-            <button onClick={_handleSave}>Save Client</button>
+            </DivEdit>
 
+            <DivBtnEdit>
 
+                <ButtonA onClick={_handleSave}>Save Client</ButtonA>
+
+                <ButtonB onClick={() => handlePage(0)}>Back Home</ButtonB>
+            
+                <ButtonDelete onClick={_handleDeleteClient}>Delete Cliente</ButtonDelete>
+            
+            </DivBtnEdit>
+
+            <DivEdit>
+
+                <h4>Visit List:</h4>
+
+            </DivEdit>
+
+            <TableEdit>
+
+                <thead>
+
+                    <tr>
+
+                        <th className='editVisitList'>Date</th>
+                        <th className='editVisitList'>Delete visit</th>
+                    
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {visitList.map((item, ind) => {
+
+                        return (
+
+                            <tr key={ind} className='editVisitList'>
+
+                                <td className='editVisitList'>{item}</td>
+                                <td className='editVisitList'><DeleteForeverIcon className='editVisitDelete' onClick={() => _handleDeleteVisit(ind)}></DeleteForeverIcon></td>
+
+                            </tr>
+                        )})
+                        }
+                  
+                </tbody>
+                    
+            </TableEdit>
+                  
         </div>
 
     )

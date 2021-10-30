@@ -105,12 +105,36 @@ const ClientsProvider = ({children}) => {
         
     }
 
+    const deleteClient = (name) => {
+
+        if(window.confirm('Are you sure you want to delete this Client?') === true) {
+
+        let ndList = clientList.map(item=>item)
+        const indexDelete = ndList.findIndex(item => item.name===name)
+
+        ndList.splice(indexDelete, 1) 
+        console.log(ndList)
+        
+        if(ndList.length === 0 ) {
+            alert("You cant't delete all clients")
+            return
+        }
+        
+        setClientList(ndList)
+        setEditPage(ndList[ndList.length-1].name)
+                
+        } else {
+            console.log('deleting cancelled')
+            return
+        }
+    }
+
 
 
 
     return (
 
-        <ClientsContext.Provider value={{clientList, areaList, addNewClient, _handleTodayVisit, _handleSelectedDate, setEditPage, editPage, _handleChangeName, setAreaList}}>{children}</ClientsContext.Provider>
+        <ClientsContext.Provider value={{clientList, areaList, addNewClient, _handleTodayVisit, _handleSelectedDate, setEditPage, editPage, _handleChangeName, setAreaList, deleteClient}}>{children}</ClientsContext.Provider>
     )
 
 

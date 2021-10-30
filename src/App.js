@@ -3,6 +3,7 @@ import React from 'react';
 import ClientsProvider from './Components/Contexts/ClientsContext';
 import Home from './Components/Home/Home';
 import {Container} from "@material-ui/core"
+import { H1 } from './Components/UI';
 
 
 function App() {
@@ -13,7 +14,7 @@ function App() {
 
           <ClientsProvider>
 
-            <h1>Scheduling Control</h1>
+            <H1>Scheduling Control</H1>
             <Home/>
 
             

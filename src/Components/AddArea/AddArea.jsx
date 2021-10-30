@@ -1,5 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { ClientsContext } from '../Contexts/ClientsContext';
+import { ButtonA, ButtonB, DivArea, InputNumber, TableArea} from '../UI';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever'
+import { TextField } from '@material-ui/core';
 
 function AddArea ({handlePage}) {
 
@@ -62,12 +65,12 @@ function AddArea ({handlePage}) {
 
     return (
 
-        <div>
+        <DivArea>
 
             <div>
 
-                <input type="text" onChange={event => setNewAreaInput(event.target.value)}/>
-                <button onClick={_handleAddArea}>Include New area</button>
+                <TextField variant='outlined' label='New Area' type="text" onChange={event => setNewAreaInput(event.target.value)}/>
+                <ButtonA onClick={_handleAddArea}>Include New area</ButtonA>
                 
 
             </div>
@@ -75,27 +78,53 @@ function AddArea ({handlePage}) {
 
             <div>
 
-                <ol>
-                    {areaList.map((item, index) => {
+                <TableArea>
 
-                    return (
+                    <thead>
 
-                        <li key={index}>{item}  - <button onClick={() => deleteArea(index)}>Delete Area</button> - <input id={index+item} type='number' max={areaList.length} min='1' placeholder='Change view position' onBlur={(event)=>_handleChangeIndex(index, event.target.value)}/></li>
+                        <tr>
 
+                            <th className='tdPosition'>Position</th>
+                            <th>Name</th>
+                            <th>Delete</th>
+                            <th>Change view Order</th>
+
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {areaList.map((item, index) => {
+
+                        return (
+
+                            <tr key={index} className='trArea'>
+
+                                <td className='tdPosition'> {index+1}</td>
+                                <td> {item}</td>
+                                <td><DeleteForeverIcon className='deleteArea' onClick={() => deleteArea(index)}>Delete Area</DeleteForeverIcon></td>
+                                <td><InputNumber id={index+item} type='number' max={areaList.length} min='1' onBlur={(event)=>_handleChangeIndex(index, event.target.value)}/></td>
+   
+
+                            </tr>
+            
                         )
                     })
                     }
 
+                    </tbody>
 
-
-                </ol>
+                    
+                </TableArea>
 
             </div>
 
             
-            <button onClick={() => handlePage(0)}>Back Home</button>
+            <ButtonB className='btnBackHome' onClick={() => handlePage(0)}>Back Home</ButtonB>
 
-        </div>
+        </DivArea>
 
     )
 

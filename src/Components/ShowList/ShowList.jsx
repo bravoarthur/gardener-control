@@ -1,9 +1,10 @@
 import React, { useContext, useState } from 'react';
 import { ClientsContext } from '../Contexts/ClientsContext';
-import { Span, Table, Tbody, Td, Th, Tr } from '../UI';
+import { InputDate, Span, Table, Tbody, Td, Th, Tr } from '../UI';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle'
 import EditIcon from '@material-ui/icons/Edit'
-import {TextField, Container, Box} from '@material-ui/core'
+
+
 
 
 
@@ -115,8 +116,11 @@ function ShowList({handlePage}) {
                                                 <Td>{it.interval}</Td>
                                                 <Td>{_handleNextVisit(it.lastVisit, it.interval)}</Td>
                                                 <Td > <CheckCircleIcon  className='btnToday' onClick={_handleTodayVisit}>Visited Today</CheckCircleIcon></Td>
-                                                <Td><Box><TextField type="date" size="small" className='dataInput' onChange={_handleSelectedDate}/></Box></Td>
-                                                <Td><EditIcon className='btnToday' onClick={_handleEdit}>Edit</EditIcon></Td>
+                                                <Td><InputDate type="date" size="small" onChange={_handleSelectedDate}/></Td>
+                                                <Td><EditIcon className='btnToday' onClick={_handleEdit}></EditIcon></Td>
+                                                
+                                                
+                                                
                                                                       
                                             </Tr>
                                     
