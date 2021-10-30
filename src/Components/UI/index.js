@@ -43,6 +43,7 @@ export const Table = styled.table`
         display: none;
     }
 
+    
 
     .btnToday{
         cursor: pointer;

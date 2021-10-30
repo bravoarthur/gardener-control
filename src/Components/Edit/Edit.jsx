@@ -34,7 +34,8 @@ function Edit({handlePage}) {
         
         newVisitList.splice(indexVisit, 1) 
         setVisitList(newVisitList)
-        _handleSave()        
+        _handleSave()   
+             
     }
 
     const _handleDeleteClient = () => {
@@ -130,7 +131,7 @@ function Edit({handlePage}) {
 
             <DivBtnEdit>
 
-                <ButtonA onClick={_handleSave}>Save Client</ButtonA>
+                <ButtonA onClick={_handleSave}>Save changes</ButtonA>
 
                 <ButtonB onClick={() => handlePage(0)}>Back Home</ButtonB>
             

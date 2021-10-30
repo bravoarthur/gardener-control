@@ -120,7 +120,7 @@ function ShowList({handlePage}) {
                                                 <Td>{it.lastVisit}</Td>
                                                 <Td>{it.interval}</Td>
                                                 <Td>{_handleNextVisit(it.lastVisit, it.interval)}</Td>
-                                                <Td > <CheckCircleIcon  className='btnToday' onClick={_handleTodayVisit}>Visited Today</CheckCircleIcon></Td>
+                                                <Td > <CheckCircleIcon className='btnToday' onClick={_handleTodayVisit}>Visited Today</CheckCircleIcon></Td>
                                                 <Td><InputDate type="date" size="small" onChange={_handleSelectedDate}/></Td>
                                                 <Td><EditIcon className='btnToday' onClick={_handleEdit}></EditIcon></Td>
                                                 
