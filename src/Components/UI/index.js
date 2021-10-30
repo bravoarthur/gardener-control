@@ -39,6 +39,9 @@ export const Table = styled.table`
         }
 
     }
+    .hiddenItem{
+        display: none;
+    }
 
 
     .btnToday{
@@ -101,7 +104,36 @@ export const Th = styled.th`
 
 `
 
+export const DivHome = styled.div`
+
+    width: 55%;    
+    display: inline-block;
+    
+    margin-right: 15%;
+
+
+`
+
 export const Span = styled.span`
+
+
+    .divSelectInterval{
+
+        display: inline-block; 
+        width: 45%      
+        
+        margin-left: 55%;
+        
+
+    }
+
+    .inputViewInterval{
+        width: 50px;
+        margin-left: 10px; 
+        margin-top: 20px;
+        text-align: left;
+    }
+
 
 
 `
@@ -390,6 +422,7 @@ export const DivEdit = styled.div`
 
         width: 40%;
         margin: auto;
+
         
 `
 

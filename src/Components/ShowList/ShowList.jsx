@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { ClientsContext } from '../Contexts/ClientsContext';
-import { InputDate, Span, Table, Tbody, Td, Th, Tr } from '../UI';
+import { InputDate, InputNumberEdit, Span, Table, Tbody, Td, Th, Tr } from '../UI';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle'
 import EditIcon from '@material-ui/icons/Edit'
 
@@ -8,11 +8,10 @@ import EditIcon from '@material-ui/icons/Edit'
 
 
 
+
 function ShowList({handlePage}) {
 
-    _handleClassDate('26/10/2021', 1)
-
-
+    
     const {areaList, clientList, _handleTodayVisit, _handleSelectedDate, setEditPage} = useContext(ClientsContext)
 
     const [intervalSelector, setIntervalSelector] = useState(0)
@@ -45,8 +44,9 @@ function ShowList({handlePage}) {
 
     const _handleInterval = (event) => {
 
+        console.log(`novo state ${event.target.value}`)
         setIntervalSelector(event.target.value)
-
+        
     }
 
     const _handleEdit = (event) => {
@@ -55,8 +55,7 @@ function ShowList({handlePage}) {
         setEditPage(clientCapture)
         handlePage(2)
     }
-
-
+   
     /*
     useEffect(() => {
 
@@ -76,9 +75,15 @@ function ShowList({handlePage}) {
 
         <Span>
 
-            <label>Select time Interval
-                <input type="number" defaultValue={intervalSelector} id="intervalSelector" min={1} onChange={_handleInterval}/>
-            </label>
+            <div className='divSelectInterval'>
+               
+                <label>Select custom interval
+                    
+                    <InputNumberEdit className='inputViewInterval' label='Select' id="intervalSelector" type="number" min={0} defaultValue='0' onChange={_handleInterval} />
+                    
+                </label>
+
+            </div>
 
           
             {areaList.map((item, index) => {
@@ -109,7 +114,7 @@ function ShowList({handlePage}) {
 
                                     return (
                                                                      
-                                            <Tr className={_handleClassDate(it.lastVisit, it.interval)} id={it.name} key={ind}>
+                                            <Tr className={_handleSelectClass(it.lastVisit, it.interval, intervalSelector)} id={it.name} key={ind}>
 
                                                 <Td>{it.name}</Td>
                                                 <Td>{it.lastVisit}</Td>
@@ -183,14 +188,11 @@ function _handleClassDate (dateClass, freq) {
     convDate.setDate(convDate.getDate() + Number(freq))
     const today = new Date()
 
-    console.log(convDate)
-    console.log(today)
-
+    
     const diff = (today.getTime() - convDate.getTime()); // Subtrai uma data pela outra
         const days = Math.ceil(diff / (1000 * 60 * 60 * 24)); // Divide o total pelo total de milisegundos correspondentes a 1 dia. (1000 milisegundos = 1 segundo).
     
-    console.log(days)
-
+   
     if(days <= 0 && days >= -7){
         return 'week'
     } else if(days > 0) {
@@ -199,5 +201,45 @@ function _handleClassDate (dateClass, freq) {
         return''
     }
 
+}
+
+function _handleClassDateSelector (dateClass, freq, intervalSelec) {
+
+    const day = dateClass.slice(0,2)
+    const month = dateClass.slice(3,5)
+    const year = dateClass.slice(6,10)
+    const date = `${year}/${month}/${day}`
+
+    const convDate = new Date(date)
+    convDate.setDate(convDate.getDate() + Number(freq))
+    const today = new Date()
+
+    
+    const diff = (today.getTime() - convDate.getTime()); // Subtrai uma data pela outra
+        const days = Math.ceil(diff / (1000 * 60 * 60 * 24)); // Divide o total pelo total de milisegundos correspondentes a 1 dia. (1000 milisegundos = 1 segundo).
+    
+        console.log(days)
+   
+    if(days < -(intervalSelec)){
+        console.log(intervalSelec)
+        return 'hiddenItem'
+    } else if(days >= 0) {
+        console.log(intervalSelec)
+        return''
+    } 
+
+}
+
+function _handleSelectClass(lastVisitDate, clientInterval, intervalSel) {
+            
+
+    if (Number(intervalSel) === 0) {
+        
+        return _handleClassDate(lastVisitDate, clientInterval)
+
+    } else {
+        
+        return _handleClassDateSelector(lastVisitDate, clientInterval, intervalSel)
+    }
 }
 

@@ -3,7 +3,7 @@ import AddArea from '../AddArea/AddArea';
 import AddClient from '../AddClient/AddClient';
 import Edit from '../Edit/Edit';
 import ShowList from '../ShowList/ShowList';
-import { ButtonA } from '../UI';
+import { ButtonA, DivHome } from '../UI';
 
 
 function Home() {
@@ -19,9 +19,10 @@ function Home() {
     return (
 
         <>
-
-            {index === 0 ? <ButtonA onClick={()=> _handlePage(1)}>Add new Client</ButtonA> : '' }
-            {index === 0 ? <ButtonA onClick={()=> _handlePage(3)}>Add new Area</ButtonA> : '' }
+            <DivHome>
+                {index === 0 ? <ButtonA onClick={()=> _handlePage(1)}>Add new Client</ButtonA> : '' }
+                {index === 0 ? <ButtonA onClick={()=> _handlePage(3)}>Add new Area</ButtonA> : '' }
+            </DivHome>
             {pages[index]}
             
         </>
