@@ -2,6 +2,7 @@
   "name": "gardener-control",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://bravoarthur.github.io/gh-clients-control/",
   "dependencies": {
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
@@ -37,5 +38,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "prettier": "2.6.2"
   }
 }
